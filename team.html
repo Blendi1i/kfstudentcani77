@@ -352,6 +352,37 @@
       }
     });
   </script>
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileToggle = document.getElementById('mobile-toggle');
+      const mobileNav = document.querySelector('.premium-nav nav');
+      const body = document.querySelector('body');
+      
+      if (mobileToggle && mobileNav) {
+        mobileToggle.addEventListener('click', () => {
+          mobileNav.classList.toggle('mobile-nav-active');
+          mobileToggle.classList.toggle('bi-list');
+          mobileToggle.classList.toggle('bi-x');
+          if(mobileNav.classList.contains('mobile-nav-active')) {
+            body.style.overflow = 'hidden';
+          } else {
+            body.style.overflow = 'auto';
+          }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileNav.classList.remove('mobile-nav-active');
+            mobileToggle.classList.remove('bi-x');
+            mobileToggle.classList.add('bi-list');
+            body.style.overflow = 'auto';
+          });
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
