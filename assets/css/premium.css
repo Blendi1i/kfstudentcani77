@@ -1,0 +1,595 @@
+/* 
+ * Premium Design System for KF Studençani 77
+ * Inspired by statsomp.fr
+ */
+
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f4f7fe;
+  --color-primary: #094BA2; /* True Studençani Blue */
+  --color-primary-dark: #063372;
+  --color-accent: #eef4ff;
+  --color-text: #1a2035;
+  --color-text-muted: #707eaa;
+  --font-title: 'Bebas Neue', cursive;
+  --font-body: 'Source Sans Pro', sans-serif;
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --brand-blue-glow: rgba(9, 75, 162, 0.2);
+  --gradient-primary: linear-gradient(135deg, #094BA2 0%, #1e6bd5 100%);
+  --shadow-premium: 0 20px 40px rgba(9, 75, 162, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* --- Preloader --- */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#preloader::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: preloader-progress 1.5s ease-in-out forwards;
+}
+
+@keyframes preloader-progress {
+  to { transform: scaleX(1); }
+}
+
+.loader-logo {
+  width: 100px;
+  height: 100px;
+  animation: pulse-blue 2s infinite ease-in-out;
+  margin-bottom: 25px;
+}
+
+.loader-text {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  letter-spacing: 8px;
+  color: var(--color-primary);
+  animation: fade-up 1s ease-out;
+  text-transform: uppercase;
+}
+
+@keyframes pulse-blue {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#preloader.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+body {
+  background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(9, 75, 162, 0.03) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, rgba(9, 75, 162, 0.03) 0, transparent 50%);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  margin: 0;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "1977";
+  position: fixed;
+  top: 50%;
+  left: -5%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: var(--font-title);
+  font-size: 15rem;
+  color: var(--color-primary);
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: -1;
+  letter-spacing: 20px;
+}
+
+body::after {
+  content: "STUDENÇANI";
+  position: fixed;
+  top: 50%;
+  right: -10%;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: var(--font-title);
+  font-size: 10rem;
+  color: var(--color-primary);
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: -1;
+  letter-spacing: 15px;
+}
+
+/* --- Top Utility Bar --- */
+.top-bar {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  z-index: 1002;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.top-bar a {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.top-bar a:hover {
+  opacity: 0.8;
+}
+
+.top-bar i {
+  color: white;
+}
+
+/* --- Navigation --- */
+.premium-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 15px 0;
+  transition: var(--transition);
+}
+
+.premium-nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-wrap img {
+  height: 45px;
+  border-radius: 5px;
+}
+
+.logo-wrap span {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.logo-wrap .accent {
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+/* --- Hero Section --- */
+.premium-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg-dark);
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: brightness(0.9);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 100%);
+  z-index: 1;
+}
+
+.hero-surtitle {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 4px;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(9, 75, 162, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1000px; /* Rritur për të zënë më shumë hapësirë */
+  transform: translateY(-250px);
+}
+
+.hero-content h1 {
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.05;
+  margin: 0;
+  color: #fff;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  white-space: nowrap; /* Ndalon thyerjen e rreshtit */
+}
+
+.hero-content h1 span.brand {
+  color: white;
+}
+
+.hero-content h1 span.number {
+  color: var(--color-primary);
+  position: relative;
+  display: inline;
+  text-shadow: 0 10px 30px rgba(9, 75, 162, 0.4);
+}
+
+.hero-content h1 span.number::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--color-primary);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.hero-content p {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-top: 25px;
+  max-width: 600px;
+  text-shadow: 0 2px 6px rgba(0,0,0,1), 0 10px 20px rgba(0,0,0,0.5);
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+.hero-cta {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.btn-premium {
+  padding: 16px 40px;
+  border-radius: 4px;
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-block;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.btn-primary-accent {
+  background: var(--gradient-primary);
+  color: #fff;
+  border: none;
+}
+
+.btn-outline-accent {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-premium:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-premium);
+}
+
+.btn-primary-accent:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+.btn-outline-accent:hover {
+  background: #fff;
+  color: var(--color-primary);
+}
+
+/* --- Section Title --- */
+.section-header {
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.section-header::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(9, 75, 162, 0.05) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.section-header .surtitle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+  margin-bottom: 10px;
+}
+
+.section-header .surtitle::before {
+  content: '';
+  width: 50px;
+  height: 2px;
+  background: var(--brand-blue);
+}
+
+.section-header h2 {
+  font-size: 3.5rem;
+  margin: 0;
+  color: var(--color-text);
+}
+
+/* --- Achievements / Palmares --- */
+.palmares-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.trophy-card {
+  background: var(--gradient-primary);
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-premium);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.trophy-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.trophy-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 71, 171, 0.2);
+}
+
+.trophy-card .icon {
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.trophy-card .count {
+  font-size: 3rem;
+  font-family: var(--font-title);
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.trophy-card .small {
+  color: var(--color-accent);
+  letter-spacing: 2px;
+}
+
+/* --- Match Cards --- */
+.match-card {
+  background: var(--color-bg);
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-left: 5px solid var(--color-primary);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.match-card .date {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  margin-bottom: 15px;
+}
+
+.match-teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.team-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.vs-box {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  padding: 5px 15px;
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+}
+
+/* --- Performance Stats --- */
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.stat-item {
+  padding: 30px;
+  background: var(--color-surface);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+}
+
+.stat-value {
+  font-size: 3rem;
+  font-family: var(--font-title);
+  color: var(--color-primary);
+}
+
+.stat-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* --- Decorative --- */
+.brush-pattern {
+  mask-image: url('assets/img/brush.svg');
+  mask-size: cover;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .section-header h2 { font-size: 2.5rem; }
+  .hero-content h1 { font-size: 3.5rem; }
+}
+
+/* --- Social Glow Hover --- */
+.social-glow:hover {
+  text-shadow: 0 0 15px var(--color-primary), 0 0 30px var(--color-accent);
+  color: var(--color-accent) !important;
+  transform: translateY(-3px);
+}
+
+/* --- Sponsor Cards --- */
+.sponsor-card {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.02);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(9, 75, 162, 0.1);
+  border-color: rgba(9, 75, 162, 0.1);
+}
+
+.sponsor-logo {
+  max-height: 55px;
+  transition: all 0.3s ease;
+  transform: scale(0.95);
+}
+
+.sponsor-card:hover .sponsor-logo {
+  transform: scale(1);
+}
+
+/* --- Results Cards --- */
+.score-box {
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  padding: 8px 25px;
+  border-radius: 4px;
+  min-width: 100px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(9, 75, 162, 0.3);
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-card .result-detail {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-top: 20px;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Galeria | KF Studençani 77</title>
+  
+  <link href="assets/img/favicon.png" rel="icon">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Custom Premium CSS -->
+  <link href="assets/css/premium.css" rel="stylesheet">
+  
+  <style>
+    .section-padding { padding: 100px 0; }
+
+    
+    .inner-hero {
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(10,10,11,0.8), rgba(10,10,11,0.8)), url('assets/img/hero.png');
+      background-size: cover;
+      background-position: center;
+      border-bottom: 2px solid var(--color-primary);
+    }
+
+    /* Gallery Specific */
+    .portfolio-filters {
+      padding: 0;
+      margin: 0 auto 40px auto;
+      list-style: none;
+      text-align: center;
+    }
+
+    .portfolio-filters li {
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 20px;
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+
+      opacity: 0.5;
+      transition: var(--transition);
+      border-bottom: 2px solid transparent;
+    }
+
+    .portfolio-filters li:hover,
+    .portfolio-filters li.filter-active {
+      opacity: 1;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-item img {
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .portfolio-info {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover .portfolio-info {
+      bottom: 0;
+    }
+
+    .portfolio-info h4 {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .portfolio-info p {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <img src="assets/img/logo.jpg" alt="Logo" class="loader-logo">
+    <div class="loader-text">KF STUDENÇANI 77</div>
+  </div>
+
+  <!-- Top Bar -->
+  <div class="top-bar d-none d-md-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="contact-info d-flex align-items-center gap-3">
+        <a href="mailto:info@kf-studencani77.com" class="text-white small text-decoration-none d-flex align-items-center"><i class="bi bi-envelope me-2"></i>info@kf-studencani77.com</a>
+        <a href="tel:049119122" class="text-white small text-decoration-none d-flex align-items-center"><i class="bi bi-smartphone me-2"></i>049 119 122</a>
+      </div>
+      <div class="social-links d-flex gap-3">
+        <a href="https://www.facebook.com/profile.php?id=61579096839380" target="_blank" class="text-white fs-6"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/kfstudencani77/" target="_blank" class="text-white fs-6"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Premium Header -->
+  <header class="premium-nav">
+    <div class="container">
+      <a href="index.html" class="logo-wrap">
+        <img src="assets/img/logo.jpg" alt="Logo">
+        <span style="font-weight: 700; font-size: 1.5rem; color: #333; font-family: 'Inter', sans-serif;">KF Studençani 77</span>
+      </a>
+
+      <nav class="d-none d-lg-block">
+        <ul class="nav-links">
+          <li><a href="index.html">Ballina</a></li>
+          <li><a href="team.html">Ekipi</a></li>
+          <li><a href="ndeshjet.html">Ndeshjet</a></li>
+          <li><a href="galeria.html" class="active">Galeria</a></li>
+          <li><a href="index.html#contact">Kontakti</a></li>
+        </ul>
+      </nav>
+
+      <div class="d-lg-none">
+        <i class="bi bi-list fs-1 cursor-pointer" id="mobile-toggle"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Inner Hero -->
+    <section class="inner-hero">
+      <div class="container">
+        <h1 class="font-bebas text-white mb-0" style="font-size: 5rem;" data-aos="fade-up">GALERIA <span class="text-primary">E KLUBIT</span></h1>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="portfolio" class="section-padding">
+      <div class="container">
+        <div class="section-header text-center" data-aos="fade-up">
+          <div class="surtitle justify-content-center">Momente</div>
+          <h2>HISTORIA NË <span class="text-primary">FOTOGRAFI</span></h2>
+        </div>
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <ul class="portfolio-filters" data-aos="fade-up">
+            <li data-filter="*" class="filter-active">TË GJITHA</li>
+            <li data-filter=".filter-app">FUSHA SPORTIT</li>
+            <li data-filter=".filter-product">KF STUDENÇANI 77 KIDS</li>
+            <li data-filter=".filter-branding">EVENTE</li>
+          </ul>
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+            <!-- Stadiumi-1 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="https://kf-studencani77.com/assets/img/masonry-portfolio/stadiumi-1.jpg" class="img-fluid" alt="Stadiumi">
+              <div class="portfolio-info">
+                <h4>STADIUMI</h4>
+                <p>Fc Studençani 77</p>
+                <div class="d-flex gap-2">
+                  <a href="https://kf-studencani77.com/assets/img/masonry-portfolio/stadiumi-1.jpg" class="glightbox preview-link text-white"><i class="bi bi-zoom-in fs-4"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stadiumi-2 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="https://kf-studencani77.com/assets/img/masonry-portfolio/stadiumi-2.jpg" class="img-fluid" alt="Stadiumi">
+              <div class="portfolio-info">
+                <h4>STADIUMI</h4>
+                <p>Fc Studençani 77</p>
+                <div class="d-flex gap-2">
+                  <a href="https://kf-studencani77.com/assets/img/masonry-portfolio/stadiumi-2.jpg" class="glightbox preview-link text-white"><i class="bi bi-zoom-in fs-4"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Junior 1 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="https://kf-studencani77.com/assets/img/masonry-portfolio/st-junior.jpg" class="img-fluid" alt="Junior">
+              <div class="portfolio-info">
+                <h4>KF STUDENÇANI 77 JUNIOR</h4>
+                <p>Fc Studençani 77</p>
+                <div class="d-flex gap-2">
+                  <a href="https://kf-studencani77.com/assets/img/masonry-portfolio/st-junior.jpg" class="glightbox preview-link text-white"><i class="bi bi-zoom-in fs-4"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Junior 2 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="https://kf-studencani77.com/assets/img/masonry-portfolio/st-junior2.jpg" class="img-fluid" alt="Junior">
+              <div class="portfolio-info">
+                <h4>KF STUDENÇANI 77 JUNIOR</h4>
+                <p>Fc Studençani 77</p>
+                <div class="d-flex gap-2">
+                  <a href="https://kf-studencani77.com/assets/img/masonry-portfolio/st-junior2.jpg" class="glightbox preview-link text-white"><i class="bi bi-zoom-in fs-4"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Event -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="https://kf-studencani77.com/assets/img/masonry-portfolio/event-1.jpg" class="img-fluid" alt="Event">
+              <div class="portfolio-info">
+                <h4>EVENTI 1</h4>
+                <p>Fc Studençani 77</p>
+                <div class="d-flex gap-2">
+                  <a href="https://kf-studencani77.com/assets/img/masonry-portfolio/event-1.jpg" class="glightbox preview-link text-white"><i class="bi bi-zoom-in fs-4"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Premium Footer -->
+  <footer class="py-5" style="background: var(--color-primary); color: white; border-top: 5px solid var(--color-primary-dark);">
+
+    <div class="container text-center">
+      <a href="index.html" class="logo-wrap justify-content-center mb-4">
+        <img src="assets/img/logo.jpg" alt="Logo" style="height: 70px; border-radius: 8px; box-shadow: 0 0 20px var(--brand-blue-glow);">
+        <span class="fs-1 text-white">KF <span style="color: var(--color-accent);">STUDENÇANI</span> 77</span>
+      </a>
+      <div class="mb-4 opacity-75 mx-auto" style="max-width: 600px; font-size: 1.1rem;">
+        <p>Nuk eshte çudi, Studençani në Statistika! Një histori krenarie që nga viti 1977.</p>
+      </div>
+      <div class="social-links d-flex justify-content-center gap-4 mb-5">
+        <a href="https://www.facebook.com/profile.php?id=61579096839380" target="_blank" class="fs-3 text-white social-glow" style="transition: var(--transition);"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/kfstudencani77/" target="_blank" class="fs-3 text-white social-glow" style="transition: var(--transition);"><i class="bi bi-instagram"></i></a>
+      </div>
+      <div class="small opacity-50" style="letter-spacing: 1px;">
+        &copy; 2026 KF Studençani 77. Të gjitha të drejtat e rezervuara. | Designed by <a href="#" style="color: var(--color-accent); text-decoration: none; font-weight: bold;">ict04.tech</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.init({ duration: 800, once: true });
+      const glightbox = GLightbox({ selector: '.glightbox' });
+
+      // Isotope Init
+      const isotopeContainer = document.querySelector('.isotope-container');
+      if (isotopeContainer) {
+        imagesLoaded(isotopeContainer, function() {
+          let isotope = new Isotope(isotopeContainer, {
+            itemSelector: '.isotope-item',
+            layoutMode: 'masonry',
+            filter: '*'
+          });
+
+          document.querySelectorAll('.portfolio-filters li').forEach(li => {
+            li.addEventListener('click', function() {
+              document.querySelector('.portfolio-filters .filter-active').classList.remove('filter-active');
+              this.classList.add('filter-active');
+              isotope.arrange({ filter: this.getAttribute('data-filter') });
+              AOS.refresh();
+            });
+          });
+        });
+      }
+    });
+  </script>
+
+  <!-- Preloader Handler -->
+  <script>
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        setTimeout(() => {
+          preloader.classList.add('preloader-hidden');
+        }, 1000);
+      }
+    });
+  </script>
+
+</body>
+
+</html>

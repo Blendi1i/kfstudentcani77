@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Ekipi | KF Studençani 77</title>
+
+  <link href="assets/img/favicon.png" rel="icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Custom Premium CSS -->
+  <link href="assets/css/premium.css" rel="stylesheet">
+
+  <style>
+    .section-padding { padding: 100px 0; }
+
+    .inner-hero {
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(10,10,11,0.8), rgba(10,10,11,0.8)), url('assets/img/hero.png');
+      background-size: cover;
+      background-position: center;
+      border-bottom: 2px solid var(--color-primary);
+    }
+
+    /* === ULTRA-PREMIUM PLAYER CARDS === */
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1200px) { .players-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px)  { .players-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .player-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #0a0f1e;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    .player-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(9,75,162,0.4), 0 0 0 1px rgba(9,75,162,0.3);
+    }
+
+    .player-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 4px;
+      background: linear-gradient(90deg, var(--color-primary), #4a9eff);
+      transition: width 0.4s ease;
+      z-index: 10;
+    }
+    .player-card:hover::before { width: 100%; }
+
+    .player-img-wrap {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+    }
+    .player-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      filter: saturate(0.85);
+    }
+    .player-card:hover .player-img-wrap img {
+      transform: scale(1.08);
+      filter: saturate(1.1);
+    }
+    .player-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(9,75,162,0.15) 60%, rgba(5,10,30,0.92) 100%);
+    }
+
+    .player-number-bg {
+      position: absolute;
+      top: 8px; right: 12px;
+      font-family: var(--font-title);
+      font-size: 6rem;
+      line-height: 1;
+      color: #fff;
+      opacity: 0.07;
+      z-index: 5;
+      pointer-events: none;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .player-card:hover .player-number-bg {
+      opacity: 0.18;
+      transform: scale(1.05) translateY(-4px);
+    }
+
+    .player-num-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(9,75,162,0.45);
+      transition: transform 0.3s;
+    }
+    .player-card:hover .player-num-badge { transform: scale(1.15); }
+
+    .player-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 18px 16px;
+      z-index: 6;
+    }
+    .player-badge {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 5px;
+    }
+    .player-name {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      line-height: 1.1;
+      color: #ffffff;
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .shimmer {
+      position: absolute;
+      top: -100%; left: -60%;
+      width: 40%; height: 200%;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.07) 50%, transparent 60%);
+      transform: skewX(-10deg);
+      transition: left 0.6s ease;
+      z-index: 8;
+      pointer-events: none;
+    }
+    .player-card:hover .shimmer { left: 160%; }
+
+    /* Social media icons */
+    .player-socials {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      transform: translateY(12px);
+      opacity: 0;
+      transition: all 0.35s ease;
+    }
+    .player-card:hover .player-socials {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .player-socials a {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .player-socials a:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      transform: scale(1.15);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <img src="assets/img/logo.jpg" alt="Logo" class="loader-logo">
+    <div class="loader-text">KF STUDENÇANI 77</div>
+  </div>
+
+  <!-- Top Bar -->
+  <div class="top-bar d-none d-md-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="contact-info d-flex align-items-center gap-3">
+        <a href="mailto:info@kf-studencani77.com" class="text-white small text-decoration-none d-flex align-items-center"><i class="bi bi-envelope me-2"></i>info@kf-studencani77.com</a>
+        <a href="tel:049119122" class="text-white small text-decoration-none d-flex align-items-center"><i class="bi bi-smartphone me-2"></i>049 119 122</a>
+      </div>
+      <div class="social-links d-flex gap-3">
+        <a href="https://www.facebook.com/profile.php?id=61579096839380" target="_blank" class="text-white fs-6"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/kfstudencani77/" target="_blank" class="text-white fs-6"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Header -->
+  <header class="premium-nav">
+    <div class="container">
+      <a href="index.html" class="logo-wrap">
+        <img src="assets/img/logo.jpg" alt="Logo">
+        <span style="font-weight:700;font-size:1.5rem;color:#333;font-family:'Inter',sans-serif;">KF Studençani 77</span>
+      </a>
+      <nav class="d-none d-lg-block">
+        <ul class="nav-links">
+          <li><a href="index.html">Ballina</a></li>
+          <li><a href="team.html" class="active">Ekipi</a></li>
+          <li><a href="ndeshjet.html">Ndeshjet</a></li>
+          <li><a href="galeria.html">Galeria</a></li>
+          <li><a href="index.html#contact">Kontakti</a></li>
+        </ul>
+      </nav>
+      <div class="d-lg-none">
+        <i class="bi bi-list fs-1 cursor-pointer" id="mobile-toggle"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Inner Hero -->
+    <section class="inner-hero">
+      <div class="container">
+        <h1 class="font-bebas text-white mb-0" style="font-size:5rem;" data-aos="fade-up">LOJTARËT <span class="text-primary">TANË</span></h1>
+      </div>
+    </section>
+
+    <!-- Players Grid -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header text-center" data-aos="fade-up">
+          <div class="surtitle justify-content-center">Skuadra e parë</div>
+          <h2>EKIPI I <span class="text-primary">KF STUDENÇANI 77</span></h2>
+        </div>
+
+        <div class="players-grid mt-5">
+
+          <!-- Template macro: num, name, initials -->
+
+          <div data-aos="fade-up" data-aos-delay="0"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">01</div><div class="player-number-bg">01</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Beqir Berisha" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=B.B'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">BEQIR BERISHA</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="50"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">02</div><div class="player-number-bg">02</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Fatlind Berisha" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=F.B'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">FATLIND BERISHA</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="100"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">03</div><div class="player-number-bg">03</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Eron Binaku" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=E.B'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">ERON BINAKU</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="150"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">04</div><div class="player-number-bg">04</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Demir Bytyqi" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=D.B'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">DEMIR BYTYQI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="0"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">05</div><div class="player-number-bg">05</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Gentin Bytyqi" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=G.B'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">GENTIN BYTYQI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="50"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">06</div><div class="player-number-bg">06</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Herolind Gashi" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=H.G'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">HEROLIND GASHI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="100"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">07</div><div class="player-number-bg">07</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Lindon Gashi" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=L.G'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">LINDON GASHI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="150"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">08</div><div class="player-number-bg">08</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Florent Gegaj" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=F.G'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">FLORENT GEGAJ</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="0"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">09</div><div class="player-number-bg">09</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Lundrim Gega" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=L.G'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">LUNDRIM GEGA</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="50"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">10</div><div class="player-number-bg">10</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Meriton Gegaj" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=M.G'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">MERITON GEGAJ</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="100"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">11</div><div class="player-number-bg">11</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Nazmi Gega" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=N.G'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">NAZMI GEGA</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="150"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">12</div><div class="player-number-bg">12</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Niazi Gega" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=N.G'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">NIAZI GEGA</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="0"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">13</div><div class="player-number-bg">13</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Dibran Jashari" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=D.J'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">DIBRAN JASHARI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="50"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">14</div><div class="player-number-bg">14</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Gentrit Jashari" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=G.J'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">GENTRIT JASHARI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="100"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">15</div><div class="player-number-bg">15</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Arlind Jupaj" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=A.J'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">ARLIND JUPAJ</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="150"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">16</div><div class="player-number-bg">16</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Granit Jupaj" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=G.J'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">GRANIT JUPAJ</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="0"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">17</div><div class="player-number-bg">17</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Endrit Kallaba" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=E.K'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">ENDRIT KALLABA</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="50"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">18</div><div class="player-number-bg">18</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Kreshnik Kotorri" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=K.K'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">KRESHNIK KOTORRI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="100"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">19</div><div class="player-number-bg">19</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Enis Krasniqi" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=E.K'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">ENIS KRASNIQI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="150"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">20</div><div class="player-number-bg">20</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Shaban Limani" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=S.L'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">SHABAN LIMANI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="0"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">21</div><div class="player-number-bg">21</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Valdrin Perrzhaku" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=V.P'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">VALDRIN PËRRZHAKU</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="50"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">22</div><div class="player-number-bg">22</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Asllan Shala" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=A.S'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">ASLLAN SHALA</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="100"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">23</div><div class="player-number-bg">23</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Arlind Tafaj" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=A.T'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">ARLIND TAFAJ</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="150"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">24</div><div class="player-number-bg">24</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Enis Zyrapi" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=E.Z'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">ENIS ZYRAPI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+          <div data-aos="fade-up" data-aos-delay="0"><div class="player-card"><div class="shimmer"></div><div class="player-num-badge">25</div><div class="player-number-bg">25</div><div class="player-img-wrap"><img src="https://kf-studencani77.com/assets/img/team/team-1.jpg" alt="Klodian Zyrapi" onerror="this.src='https://placehold.co/400x600/094BA2/fff?text=K.Z'"></div><div class="player-info"><div class="player-badge">LOJTAR</div><h3 class="player-name">KLODIAN ZYRAPI</h3><div class="player-socials"><a href="#" title="Facebook"><i class="bi bi-facebook"></i></a><a href="#" title="Instagram"><i class="bi bi-instagram"></i></a></div></div></div></div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Premium Footer -->
+  <footer class="py-5" style="background: var(--color-primary); color: white; border-top: 5px solid var(--color-primary-dark);">
+    <div class="container text-center">
+      <a href="index.html" class="logo-wrap justify-content-center mb-4">
+        <img src="assets/img/logo.jpg" alt="Logo" style="height:70px;border-radius:8px;box-shadow:0 0 20px var(--brand-blue-glow);">
+        <span class="fs-1 text-white">KF <span style="color:var(--color-accent);">STUDENÇANI</span> 77</span>
+      </a>
+      <div class="mb-4 opacity-75 mx-auto" style="max-width:600px;font-size:1.1rem;">
+        <p>Nuk eshte çudi, Studençani në Statistika! Një histori krenarie që nga viti 1977.</p>
+      </div>
+      <div class="social-links d-flex justify-content-center gap-4 mb-5">
+        <a href="https://www.facebook.com/profile.php?id=61579096839380" target="_blank" class="fs-3 text-white social-glow"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/kfstudencani77/" target="_blank" class="fs-3 text-white social-glow"><i class="bi bi-instagram"></i></a>
+      </div>
+      <div class="small opacity-50" style="letter-spacing:1px;">
+        &copy; 2026 KF Studençani 77. Të gjitha të drejtat e rezervuara. | Designed by <a href="#" style="color:var(--color-accent);text-decoration:none;font-weight:bold;">ict04.tech</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vendor JS -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.init({ duration: 800, once: true });
+    });
+  </script>
+  <script>
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        setTimeout(() => { preloader.classList.add('preloader-hidden'); }, 1000);
+      }
+    });
+  </script>
+
+</body>
+</html>
